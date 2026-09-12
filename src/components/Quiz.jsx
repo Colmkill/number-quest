@@ -115,7 +115,7 @@ useEffect(() => {
           key={problemKeyRef.current}
           problem={problem}
           onAnswer={advance}
-          onPause={setPaused}          // NEW
+          onPause={setPaused}          
           questionNumber={index + 1}
           totalQuestions={QUESTION_COUNT}
         />

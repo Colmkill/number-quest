@@ -83,6 +83,7 @@ function explorerProblem() {
     answer: String(answer),
     options: buildNumericOptions(answer, distractors, 0),
     format: 'number',
+    operands: { a, b, op },
   }
 }
 
@@ -208,4 +209,21 @@ export function generateSet(tierId, count) {
   const set = []
   for (let i = 0; i < count; i++) set.push(generateProblem(tierId))
   return set
+}
+
+export function dominoSplit(n) {
+  if (n <= 0) return [0, 0]
+  const top = Math.min(6, Math.ceil(n / 2))
+  const bottom = n - top
+  return [top, bottom]
+}
+export function dominoChunks(n) {
+  const chunks = []
+  let remaining = n
+  while (remaining > 10) {
+    chunks.push(10)
+    remaining -= 10         
+  }
+  chunks.push(remaining)
+  return chunks
 }

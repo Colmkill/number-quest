@@ -496,3 +496,190 @@ input:focus-visible {
   .tier-picker { grid-template-columns: 1fr; }
   .problem-options { grid-template-columns: 1fr; }
 }
+/* ---------- Visual helper ---------- */
+
+.visual-helper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0;
+  flex-wrap: wrap;
+}
+.dot-group {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 6px;
+  width: 100px;
+  height: 44px;
+}
+
+.dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  align-self: center;
+  justify-self: center;
+}
+
+.dot-a { background: var(--sky); }
+.dot-b { background: var(--coral); }
+
+/* Each pattern below positions its dots onto specific cells of the 3x3 grid */
+
+.dot-group-1 .dot:nth-child(1) { grid-column: 2; grid-row: 2; }
+
+.dot-group-2 .dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+.dot-group-2 .dot:nth-child(2) { grid-column: 3; grid-row: 3; }
+
+.dot-group-3 .dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+.dot-group-3 .dot:nth-child(2) { grid-column: 2; grid-row: 2; }
+.dot-group-3 .dot:nth-child(3) { grid-column: 3; grid-row: 3; }
+
+.dot-group-4 .dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+.dot-group-4 .dot:nth-child(2) { grid-column: 3; grid-row: 1; }
+.dot-group-4 .dot:nth-child(3) { grid-column: 1; grid-row: 3; }
+.dot-group-4 .dot:nth-child(4) { grid-column: 3; grid-row: 3; }
+
+.dot-group-5 .dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+.dot-group-5 .dot:nth-child(2) { grid-column: 3; grid-row: 1; }
+.dot-group-5 .dot:nth-child(3) { grid-column: 2; grid-row: 2; }
+.dot-group-5 .dot:nth-child(4) { grid-column: 1; grid-row: 3; }
+.dot-group-5 .dot:nth-child(5) { grid-column: 3; grid-row: 3; }
+
+.dot-group-6 .dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+.dot-group-6 .dot:nth-child(2) { grid-column: 1; grid-row: 2; }
+.dot-group-6 .dot:nth-child(3) { grid-column: 1; grid-row: 3; }
+.dot-group-6 .dot:nth-child(4) { grid-column: 3; grid-row: 1; }
+.dot-group-6 .dot:nth-child(5) { grid-column: 3; grid-row: 2; }
+.dot-group-6 .dot:nth-child(6) { grid-column: 3; grid-row: 3; }
+
+.dot-group-7 .dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+.dot-group-7 .dot:nth-child(2) { grid-column: 1; grid-row: 2; }
+.dot-group-7 .dot:nth-child(3) { grid-column: 1; grid-row: 3; }
+.dot-group-7 .dot:nth-child(4) { grid-column: 3; grid-row: 1; }
+.dot-group-7 .dot:nth-child(5) { grid-column: 3; grid-row: 2; }
+.dot-group-7 .dot:nth-child(6) { grid-column: 3; grid-row: 3; }
+.dot-group-7 .dot:nth-child(7) { grid-column: 2; grid-row: 2; }
+
+
+.dot-group-8 .dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+.dot-group-8 .dot:nth-child(2) { grid-column: 1; grid-row: 2; }
+.dot-group-8 .dot:nth-child(3) { grid-column: 1; grid-row: 3; }
+.dot-group-8 .dot:nth-child(4) { grid-column: 1; grid-row: 4; }
+.dot-group-8 .dot:nth-child(5) { grid-column: 4; grid-row: 1; }
+.dot-group-8 .dot:nth-child(6) { grid-column: 4; grid-row: 2; }
+.dot-group-8 .dot:nth-child(7) { grid-column: 4; grid-row: 3; }
+.dot-group-8 .dot:nth-child(8) { grid-column: 4; grid-row: 4; }
+
+.dot-group-9 .dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+.dot-group-9 .dot:nth-child(2) { grid-column: 1; grid-row: 2; }
+.dot-group-9 .dot:nth-child(3) { grid-column: 1; grid-row: 3; }
+.dot-group-9 .dot:nth-child(4) { grid-column: 2; grid-row: 1; }
+.dot-group-9 .dot:nth-child(5) { grid-column: 2; grid-row: 2; }
+.dot-group-9 .dot:nth-child(6) { grid-column: 2; grid-row: 3; }
+.dot-group-9 .dot:nth-child(7) { grid-column: 3; grid-row: 1; }
+.dot-group-9 .dot:nth-child(8) { grid-column: 3; grid-row: 2; }
+.dot-group-9 .dot:nth-child(9) { grid-column: 3; grid-row: 3; }
+/* 7+ falls back to row-grouping instead of a die face — dice patterns only exist up to 6 */
+.dot-group-overflow {
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: none;
+  width: auto;
+  height: auto;
+}
+.dot-group-overflow .dot { grid-column: auto; grid-row: auto; }
+
+.visual-op {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--plum);
+}
+
+.domino-tile {
+  display: flex;
+  flex-direction: column;
+  width: 60px;
+  background: var(--white);
+  border: 3px solid var(--plum);
+  border-radius: 10px;
+  padding: 6px;
+  gap: 5px;
+}
+
+.domino-divider {
+  height: 2px;
+  background: var(--plum);
+  border-radius: 1px;
+}
+
+.pip-half {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 3px;
+  height: 40px;
+}
+
+.pip-half .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--plum);
+  align-self: center;
+  justify-self: center;
+}
+
+.pip-half-1 .dot:nth-child(1) { grid-column: 2; grid-row: 1 / 3; }
+
+.pip-half-2 .dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+.pip-half-2 .dot:nth-child(2) { grid-column: 3; grid-row: 2; }
+
+.pip-half-3 .dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+.pip-half-3 .dot:nth-child(2) { grid-column: 2; grid-row: 1 / 3; }
+.pip-half-3 .dot:nth-child(3) { grid-column: 3; grid-row: 2; }
+
+.pip-half-4 .dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+.pip-half-4 .dot:nth-child(2) { grid-column: 3; grid-row: 1; }
+.pip-half-4 .dot:nth-child(3) { grid-column: 1; grid-row: 2; }
+.pip-half-4 .dot:nth-child(4) { grid-column: 3; grid-row: 2; }
+
+.pip-half-5 .dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+.pip-half-5 .dot:nth-child(2) { grid-column: 3; grid-row: 1; }
+.pip-half-5 .dot:nth-child(3) { grid-column: 2; grid-row: 1 / 3; }
+.pip-half-5 .dot:nth-child(4) { grid-column: 1; grid-row: 2; }
+.pip-half-5 .dot:nth-child(5) { grid-column: 3; grid-row: 2; }
+
+.pip-half-6 .dot:nth-child(1) { grid-column: 1; grid-row: 1; }
+.pip-half-6 .dot:nth-child(2) { grid-column: 3; grid-row: 1; }
+.pip-half-6 .dot:nth-child(3) { grid-column: 1; grid-row: 2; }
+.pip-half-6 .dot:nth-child(4) { grid-column: 3; grid-row: 2; }
+.pip-half-6 .dot:nth-child(5) { grid-column: 1; grid-row: 1 / 3; }
+.pip-half-6 .dot:nth-child(6) { grid-column: 3; grid-row: 1 / 3; }
+
+.domino-group {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.tab-toggle-btn {
+  background: var(--cream);
+  border: 2px solid #E8E4D6;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  padding: 8px 16px;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--plum-soft);
+  margin-bottom: -2px;
+}
+
+.tab-toggle-btn:hover {
+  color: var(--plum);
+}
+/*  npm install  */
+/*  npm run dev  */
+/*  */
+/*  */
