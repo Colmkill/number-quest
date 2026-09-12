@@ -54,19 +54,26 @@ export default function ProblemCard({ problem, onAnswer, questionNumber, totalQu
       {totalQuestions && (
         <p className="problem-progress">Question {questionNumber} of {totalQuestions}</p>
       )}
-      <p className="problem-prompt">{problem.prompt} = ?</p>
+      {problem.format === 'algebra' ? (
+  <div className="problem-prompt">
+    <div className="prompt-line">{problem.prompt}</div>
+    <div className="prompt-line prompt-line-sub">x = ?</div>
+  </div>
+) : (
+  <p className="problem-prompt">{problem.prompt} = ?</p>
+)}
 
-      {!locked && (
-        <button
-          className="tab-toggle-btn"
-          onClick={() => {
-            setShowHelp(false)
-            setShowDominoTab((v) => !v)
-          }}
-        >
-          {showDominoTab ? 'Hide picture' : 'Show picture'}
-        </button>
-      )}
+      {!locked && problem.format === 'number' && (
+          <button
+            className="tab-toggle-btn"
+            onClick={() => {
+              setShowHelp(false)
+              setShowDominoTab((v) => !v)
+            }}
+          >
+            {showDominoTab ? 'Hide picture' : 'Show picture'}
+          </button>
+        )}
 
 
       <div className="problem-options">

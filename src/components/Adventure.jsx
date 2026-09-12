@@ -3,6 +3,7 @@ import TierPicker from './TierPicker.jsx'
 import ProblemCard from './ProblemCard.jsx'
 import Mascot from './Mascot.jsx'
 import { TIERS, generateSet } from '../utils/problems.js'
+import Certificate from './Certificate.jsx'
 
 const LEVELS = 6
 const QUESTIONS_PER_LEVEL = 5
@@ -32,6 +33,7 @@ export default function Adventure({ onBack, progress, onLevelComplete }) {
   const [correctCount, setCorrectCount] = useState(0)
   const [result, setResult] = useState(null) // { stars, correct }
 
+const [showCertificate, setShowCertificate] = useState(false)
   const tierProgress = progress.tiers[tier]
 
   function startLevel(level) {
@@ -50,6 +52,11 @@ export default function Adventure({ onBack, progress, onLevelComplete }) {
       const stars = starsFor(nextCorrect)
       setResult({ stars, correct: nextCorrect })
       onLevelComplete(tier, activeLevel, stars)
+
+      // NEW — check if this just cleared Champion's final level
+      if (tier === 'champion' && activeLevel === LEVELS && stars > 0) {
+        setShowCertificate(true)
+      }
     } else {
       setIndex(next)
     }
@@ -83,31 +90,35 @@ export default function Adventure({ onBack, progress, onLevelComplete }) {
   }
 
   if (result) {
-    const passed = result.stars > 0
-    return (
-      <div className="screen">
-        <button className="back-btn" onClick={exitLevel}>← Back to map</button>
-        <div className="quiz-result">
-          <Mascot mood={passed ? 'cheer' : 'happy'} size={96} />
-          <h2>{result.correct} / {QUESTIONS_PER_LEVEL} correct</h2>
-          <div className="stars-row">
-            {[1, 2, 3].map((n) => (
-              <span key={n} className={`star ${n <= result.stars ? 'is-lit' : ''}`}>★</span>
-            ))}
-          </div>
-          <p>
-            {passed
-              ? 'Level cleared! The next stop on the map is open.'
-              : "So close — get 3 or more correct to clear this level. Give it another go?"}
-          </p>
-          <div className="quiz-result-actions">
-            <button className="primary-btn" onClick={() => startLevel(activeLevel)}>Play again</button>
-            <button className="secondary-btn" onClick={exitLevel}>Back to map</button>
-          </div>
+  const passed = result.stars > 0
+  return (
+    <div className="screen">
+      <button className="back-btn" onClick={exitLevel}>← Back to map</button>
+      <div className="quiz-result">
+        <Mascot mood={passed ? 'cheer' : 'happy'} size={96} />
+        <h2>{result.correct} / {QUESTIONS_PER_LEVEL} correct</h2>
+        <div className="stars-row">
+          {[1, 2, 3].map((n) => (
+            <span key={n} className={`star ${n <= result.stars ? 'is-lit' : ''}`}>★</span>
+          ))}
+        </div>
+        <p>
+          {passed
+            ? 'Level cleared! The next stop on the map is open.'
+            : "So close — get 3 or more correct to clear this level. Give it another go?"}
+        </p>
+        <div className="quiz-result-actions">
+          <button className="primary-btn" onClick={() => startLevel(activeLevel)}>Play again</button>
+          <button className="secondary-btn" onClick={exitLevel}>Back to map</button>
         </div>
       </div>
-    )
-  }
+
+      {showCertificate && (
+        <Certificate name={progress.name} onClose={() => setShowCertificate(false)} />
+      )}
+    </div>
+  )
+}
 
   return (
     <div className="screen">

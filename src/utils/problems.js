@@ -90,7 +90,6 @@ function explorerProblem() {
 function adventurerProblem() {
   const opRoll = Math.random()
   if (opRoll < 0.35) {
-    // bigger addition/subtraction
     const op = Math.random() < 0.5 ? '+' : '-'
     let a = randInt(10, 60)
     let b = randInt(10, 60)
@@ -102,9 +101,9 @@ function adventurerProblem() {
       answer: String(answer),
       options: buildNumericOptions(answer, distractors, 0),
       format: 'number',
+      operands: { a, b, op },   // NEW
     }
   } else if (opRoll < 0.7) {
-    // multiplication
     const a = randInt(2, 12)
     const b = randInt(2, 12)
     const answer = a * b
@@ -114,9 +113,9 @@ function adventurerProblem() {
       answer: String(answer),
       options: buildNumericOptions(answer, distractors, 0),
       format: 'number',
+      operands: { a, b, op: '×' },   // NEW
     }
   } else {
-    // exact division
     const b = randInt(2, 12)
     const answer = randInt(2, 12)
     const a = b * answer
@@ -126,37 +125,37 @@ function adventurerProblem() {
       answer: String(answer),
       options: buildNumericOptions(answer, distractors, 0),
       format: 'number',
+      operands: { a, b, op: '÷' },   // NEW
     }
   }
 }
 
 function championProblem() {
   const opRoll = Math.random()
-  if (opRoll < 0.34) {
-    // like-denominator fraction addition/subtraction
-    const den = [4, 5, 6, 8, 10][randInt(0, 4)]
-    let n1 = randInt(1, den - 1)
-    let n2 = randInt(1, den - 1)
-    const op = Math.random() < 0.5 ? '+' : '-'
-    if (op === '-' && n2 > n1) [n1, n2] = [n2, n1]
-    let num = op === '+' ? n1 + n2 : n1 - n2
-    let d = den
-    const g = gcd(Math.max(num, 1), d)
-    if (num > 0 && g > 1) {
-      num = num / g
-      d = d / g
-    }
-    const answer = d === 1 ? String(num) : `${num}/${d}`
-    const wrongForm = op === '+' ? `${n1 + n2}/${den}` : `${Math.abs(n1 - n2)}/${den}`
-    const distractorSet = new Set([answer, wrongForm, `${n1}/${den}`, `${n2}/${den}`, `${num + 1}/${d}`, `${Math.max(num - 1, 0)}/${d}`])
-    distractorSet.delete(answer)
-    const options = shuffle([answer, ...Array.from(distractorSet).slice(0, 3)])
-    return {
-      prompt: `${n1}/${den} ${op} ${n2}/${den}`,
-      answer,
-      options: options.length >= 4 ? options.slice(0, 4) : options.concat([`${num}/${d + 2}`]),
-      format: 'fraction',
-    }
+if (opRoll < 0.34) {
+  const den = [4, 5, 6, 8, 10][randInt(0, 4)]
+  let n1 = randInt(1, den - 1)
+  let n2 = randInt(1, den - 1)
+  const op = Math.random() < 0.5 ? '+' : '-'
+  if (op === '-' && n2 > n1) [n1, n2] = [n2, n1]
+  const num = op === '+' ? n1 + n2 : n1 - n2
+  const answer = `${num}/${den}`
+
+  const distractorSet = new Set([
+    `${num + 1}/${den}`,
+    `${Math.max(num - 1, 0)}/${den}`,
+    `${n1}/${den}`,
+    `${n2}/${den}`,
+  ])
+  distractorSet.delete(answer)
+  const options = shuffle([answer, ...Array.from(distractorSet).slice(0, 3)])
+  return {
+    prompt: `${n1}/${den} ${op} ${n2}/${den}`,
+    answer,
+    options: options.length >= 4 ? options.slice(0, 4) : options.concat([`${num}/${den + 2}`]),
+    format: 'fraction',
+  }
+
   } else if (opRoll < 0.67) {
     // decimals, one decimal place
     const op = Math.random() < 0.5 ? '+' : '-'
@@ -226,4 +225,11 @@ export function dominoChunks(n) {
   }
   chunks.push(remaining)
   return chunks
+}
+
+export function squareDims(n) {
+  if (n <= 0) return { cols: 1, rows: 1 }
+  const cols = Math.ceil(Math.sqrt(n))
+  const rows = Math.ceil(n / cols)
+  return { cols, rows }
 }

@@ -1,6 +1,7 @@
 const STORAGE_KEY = 'number-quest-progress-v1'
 const LEVELS_PER_TIER = 6
 
+
 function defaultProgress() {
   return {
     name: '',

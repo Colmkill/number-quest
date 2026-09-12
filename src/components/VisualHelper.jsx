@@ -1,4 +1,5 @@
 import DominoGroup from './DominoGroup.jsx'
+import ArrayGrid from './ArrayGrid.jsx'
 
 const OP_WORDS = {
   '+': 'added to',
@@ -7,10 +8,23 @@ const OP_WORDS = {
   '÷': 'divided by',
 }
 
+
+
 export default function VisualHelper({ operands }) {
   if (!operands) return null
   const { a, b, op } = operands
 
+
+if (op === '×' || op === '÷') {
+  const isDivision = op === '÷'
+  const rows = isDivision ? a / b : a
+  const cols = isDivision ? b : b
+  return (
+    <div className="visual-helper">
+      <ArrayGrid rows={rows} cols={cols} colorClass="dot-a" />
+    </div>
+  )
+}
   return (
     <div className="visual-helper">
       <DominoGroup value={a} />
