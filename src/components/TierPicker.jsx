@@ -15,6 +15,7 @@ export default function TierPicker({ selected, onSelect }) {
           <span className="tier-chip-name">{tier.name}</span>
           <span className="tier-chip-tagline">{tier.tagline}</span>
         </button>
+        
       ))}
     </div>
   )

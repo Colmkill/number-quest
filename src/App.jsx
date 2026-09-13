@@ -3,7 +3,7 @@ import Home from './components/Home.jsx'
 import Practice from './components/Practice.jsx'
 import Quiz from './components/Quiz.jsx'
 import Adventure from './components/Adventure.jsx'
-import { loadProgress, saveProgress, recordLevelResult, recordQuizResult } from './utils/progress.js'
+import { loadProgress, saveProgress, clearProgress, recordLevelResult, recordQuizResult } from './utils/progress.js'
 
 export default function App() {
   const [screen, setScreen] = useState('home')
@@ -27,9 +27,9 @@ export default function App() {
 
   return (
     <div className="app">
-      {screen === 'home' && (
-        <Home name={progress.name} onNameChange={updateName} onNavigate={setScreen} />
-      )}
+     {screen === 'home' && (
+  <Home name={progress.name} onNameChange={updateName} onNavigate={setScreen} onReset={handleResetProgress} />
+)}
       {screen === 'practice' && <Practice onBack={() => setScreen('home')} />}
       {screen === 'quiz' && (
         <Quiz onBack={() => setScreen('home')} onFinish={handleQuizFinish} />
@@ -43,4 +43,8 @@ export default function App() {
       )}
     </div>
   )
+
+function handleResetProgress() {
+  setProgress(clearProgress())
+}
 }

@@ -113,8 +113,11 @@ const [showCertificate, setShowCertificate] = useState(false)
         </div>
       </div>
 
+
+
+
       {showCertificate && (
-        <Certificate name={progress.name} onClose={() => setShowCertificate(false)} />
+        <Certificate name={progress.name} progress={progress} onClose={() => setShowCertificate(false)} />
       )}
     </div>
   )
@@ -123,6 +126,9 @@ const [showCertificate, setShowCertificate] = useState(false)
   return (
     <div className="screen">
       <button className="back-btn" onClick={onBack}>← Back home</button>
+
+
+
       <div className="screen-header">
         <Mascot mood="happy" size={64} />
         <div>
@@ -132,6 +138,21 @@ const [showCertificate, setShowCertificate] = useState(false)
       </div>
 
       <TierPicker selected={tier} onSelect={setTier} />
+ {/* TEMPORARY — remove after testing */}
+  {/* TEMPORARY — remove after testing */}
+                <button
+            className="secondary-btn"
+            onClick={() => {
+              console.log('clicked')
+              setShowCertificate(true)
+            }}
+          >
+            Test certificate
+          </button>
+          {showCertificate && (
+           <Certificate name={progress.name} progress={progress} onClose={() => setShowCertificate(false)} />
+          )}     
+ {/* TEMPORARY — remove after testing */}
 
       <div className="adventure-map" style={{ '--tier-color': TIERS[tier].color }}>
         <svg className="adventure-path" viewBox="0 0 100 100" preserveAspectRatio="none">

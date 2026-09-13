@@ -1,6 +1,6 @@
 import Mascot from './Mascot.jsx'
 
-export default function Home({ name, onNameChange, onNavigate }) {
+export default function Home({ name, onNameChange, onNavigate, onReset }) {
   return (
     <div className="home">
       <div className="home-hero">
@@ -35,7 +35,10 @@ export default function Home({ name, onNameChange, onNavigate }) {
           <span className="path-desc">Walk the path, unlock levels, earn stars.</span>
         </button>
       </div>
-
+      
+<button className="secondary-btn" onClick={() => { if (confirm('Reset all progress? This cannot be undone.')) onReset() }}>
+  Reset my progress
+</button>
       <p className="home-footnote">
         Everything you do stays on this device. No accounts, no sign-ups, nothing shared.
       </p>

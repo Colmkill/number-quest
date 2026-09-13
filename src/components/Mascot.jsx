@@ -1,4 +1,4 @@
-export default function Mascot({ mood = 'happy', size = 96 }) {
+export default function Mascot({ mood = 'happy', size = 96,scholar = false }) {
   // mood: 'happy' | 'cheer' | 'think'
   const eyes = {
     happy: <><circle cx="41" cy="52" r="4.5" fill="#3D3B54" /><circle cx="61" cy="52" r="4.5" fill="#3D3B54" /></>,
@@ -10,7 +10,7 @@ export default function Mascot({ mood = 'happy', size = 96 }) {
     cheer: <path d="M38 62 Q51 78 64 62" stroke="#3D3B54" strokeWidth="4" fill="#FFC93C" strokeLinecap="round" strokeLinejoin="round" />,
     think: <path d="M43 66 Q51 63 59 66" stroke="#3D3B54" strokeWidth="4" fill="none" strokeLinecap="round" />,
   }
-  return (
+ return (
     <svg width={size} height={size} viewBox="0 0 102 102" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M18 20 L26 32 L14 34 Z" fill="#FFC93C" />
       <path d="M82 18 L88 32 L74 30 Z" fill="#FF6B6B" />
@@ -21,6 +21,26 @@ export default function Mascot({ mood = 'happy', size = 96 }) {
       {mouth[mood]}
       <circle cx="33" cy="60" r="5" fill="#FF6B6B" fillOpacity="0.45" />
       <circle cx="69" cy="60" r="5" fill="#FF6B6B" fillOpacity="0.45" />
+
+      {scholar && (
+        <>
+          {/* Bow tie, sitting just under the face */}
+          <path d="M40 88 L50 82 L50 94 Z" fill="#FF6B6B" />
+          <path d="M62 88 L52 82 L52 94 Z" fill="#FF6B6B" />
+          <circle cx="51" cy="88" r="3" fill="#3D3B54" />
+
+          {/* Monocle over the right eye, with a small chain */}
+          <circle cx="61" cy="52" r="9" fill="none" stroke="#3D3B54" strokeWidth="2.5" />
+          <path d="M69 58 Q74 66 70 74" stroke="#3D3B54" strokeWidth="2" fill="none" strokeLinecap="round" />
+
+          {/* Mortarboard cap */}
+          <rect x="30" y="12" width="42" height="6" rx="1" fill="#3D3B54" transform="rotate(-6 51 15)" />
+          <path d="M18 16 L51 6 L84 16 L51 24 Z" fill="#3D3B54" transform="translate(0,-2)" />
+          <circle cx="51" cy="6" r="2.5" fill="#FFC93C" />
+          <path d="M51 6 L58 18" stroke="#FFC93C" strokeWidth="1.8" strokeLinecap="round" />
+        </>
+      )}
+
       <defs>
         <radialGradient id="grad" cx="0.3" cy="0.25" r="0.9">
           <stop offset="0" stopColor="#FFFFFF" />

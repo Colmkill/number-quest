@@ -53,5 +53,21 @@ export function recordQuizResult(progress, tierId, score, total) {
   }
   return next
 }
+export function totalStars(progress) {
+  return Object.values(progress.tiers).reduce((sum, tier) => {
+    const tierStars = Object.values(tier.stars).reduce((s, v) => s + v, 0)
+    return sum + tierStars
+  }, 0)
+}
 
-export const LEVELS_PER_TIER_EXPORT = LEVELS_PER_TIER
+export const MAX_STARS = 3 * LEVELS_PER_TIER * 3
+
+
+export function clearProgress() {
+  try {
+    localStorage.removeItem(STORAGE_KEY)
+  } catch {
+    // storage unavailable — nothing to clear
+  }
+  return defaultProgress()
+}
